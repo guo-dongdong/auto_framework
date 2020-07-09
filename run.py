@@ -12,10 +12,10 @@ from datetime import datetime
 from libs.HTMLTestRunnerNew import HTMLTestRunner
 from config.setting import config
 
-# 初始化testloader
+# 初始化testloader加载器
 testloader = unittest.TestLoader()
-# 查找测试用例，加载
-suite = testloader.discover(config.case_path) # , 'test_*.py'
+# 查找测试用例
+suite = testloader.discover(config.case_path)
 
 # 测试报告
 # 报告名称加时间戳
@@ -23,7 +23,6 @@ ts = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 # ts = str(int(time.time()))
 
 file_name = 'Test_Result_{}.html'.format(ts)
-
 file_path = os.path.join(config.report_path, file_name)
 # HTML
 # TODO:HTML一定要使用二进制的方式打开
