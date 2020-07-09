@@ -7,10 +7,11 @@
 """注册相关测试用例"""
 import os
 import unittest
-import ddt
+from libs import ddt
 from common.excel_handler import ExcelHandler
-from config.setting import config, DevConfig
+from config.setting import config
 from common.requests_handler import RequestsHandler
+import json
 
 
 @ddt.ddt
@@ -32,10 +33,12 @@ class TestRegister(unittest.TestCase):
 
         # 访问接口得到实际结果
         res = self.req.visit(test_data['method'],
-                             DevConfig.host + test_data['url'],
-                             json=eval(test_data['data']),
-                             headers=eval(test_data['headers']))
+                             config.host + test_data['url'],
+                             json=json.loads(test_data['data']),
+                             headers=json.loads(test_data['headers']))
         # 获取预期结果test_data['expected']
         # 断言
+        print(res)
         self.assertEqual(test_data['expected'], res['code'])
 
+        # 把实际结果写入excel

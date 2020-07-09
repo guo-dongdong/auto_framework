@@ -14,10 +14,18 @@ class Config:
     # 测试数据路径
     data_path = os.path.join(root_path, 'data/cases.xlsx')
 
+    # 测试用例路径
+    case_path = os.path.join(root_path, 'test_cases')
+
+    # 测试报告路径
+    report_path = os.path.join(root_path, 'report')
+    if not os.path.exists(report_path):
+        os.mkdir(report_path)
+
 class DevConfig(Config):
 
     # 项目域名
     host = 'http://120.78.128.25:8766/futureloan'
 
 
-config = Config()
+config = DevConfig()
