@@ -1,10 +1,12 @@
-#!/usr/bin/env python
+ #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 # @CreateTime    : 2020-07-05 16:12
 # @Author  : guoDD
 # @Email   : Email
 # @File    : logger_handler
 import logging
+
+from config.setting import config
 
 
 class LoggerHandler(logging.Logger):
@@ -37,8 +39,5 @@ class LoggerHandler(logging.Logger):
         self.addHandler(stream_handler)
 
 
-logger = LoggerHandler("python25",file='python25_log.txt')
 
-if __name__ == '__main__':
-    logger = LoggerHandler()
-    logger.debug("hello world_python_python")
+# logger = LoggerHandler(config.logger_name,file=config.logger_file)

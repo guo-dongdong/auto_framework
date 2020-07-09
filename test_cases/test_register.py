@@ -7,6 +7,8 @@
 """注册相关测试用例"""
 import os
 import unittest
+
+from common.logger_handler import LoggerHandler
 from libs import ddt
 from common.excel_handler import ExcelHandler
 from config.setting import config
@@ -20,6 +22,8 @@ class TestRegister(unittest.TestCase):
     # 读取数据
     excel_handler = ExcelHandler(config.data_path)
     data = excel_handler.read('register')
+
+    logger = LoggerHandler("python25")
 
     def setUp(self):
         self.req = RequestsHandler()
@@ -38,7 +42,14 @@ class TestRegister(unittest.TestCase):
                              headers=json.loads(test_data['headers']))
         # 获取预期结果test_data['expected']
         # 断言
-        print(res)
-        self.assertEqual(test_data['expected'], res['code'])
+
+        try:
+            self.assertEqual(test_data['expected'], res['code'])
+        except AssertionError as e:
+            return "断言失败：", e
+
+
+        # 如果出现断言失败，要将失败的用例记录写到log里面
+        # AssertionError
 
         # 把实际结果写入excel
