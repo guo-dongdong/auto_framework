@@ -9,6 +9,9 @@
 from configparser import ConfigParser
 import yaml
 
+from config.setting import config
+
+
 class ConfigHandler(ConfigParser):
 
     def __init__(self, file, encoding='utf-8'):
@@ -41,5 +44,9 @@ if __name__ == '__main__':
     # print(b)
 
     # 先读取yaml数据
-    data = read_yaml("python_25.yaml")
-    write_yaml("pytron_26.yaml", data)
+    # data = read_yaml("python_25.yaml")
+    # write_yaml("pytron_26.yaml", data)
+
+    # yaml读取
+    yaml_data = read_yaml(config.yaml_config_path)
+    print(yaml_data)

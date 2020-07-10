@@ -1,7 +1,7 @@
 # logger_name
 # logger_level
 # logger_file
-logger
-  name: python
+logger:
+  name: python25
   level: WARNING
   file: python25.txt
