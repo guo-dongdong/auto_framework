@@ -81,7 +81,7 @@ class TestRegister(unittest.TestCase):
                                      "测试通过")
         except AssertionError as e:
             # 记录log
-            self.logger.error("测试用例失败", e)
+            self.logger.error("测试用例失败:{}".format(e))
 
             self.excel_handler.write(config.data_path,
                                      "register",
