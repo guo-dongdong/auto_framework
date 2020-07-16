@@ -116,9 +116,9 @@ function html_escape(s) {
 <div class='heading'>
 <h1 style="font-family: Microsoft YaHei">前程贷接口测试报告</h1>
 <p class='attribute'><strong>测试人员 : </strong> _小川</p>
-<p class='attribute'><strong>开始时间 : </strong> 2020-07-15 20:24:31</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:00.392949</p>
-<p class='attribute'><strong>测试结果 : </strong> 共 4，通过 2，失败 2，通过率= 50.00%</p>
+<p class='attribute'><strong>开始时间 : </strong> 2020-07-16 23:03:34</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:01.072144</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 4，通过 2，失败 1，错误 1，通过率= 50.00%</p>
 
 <p class='description'>前程贷接口测试报告</p>
 </div>
@@ -126,7 +126,7 @@ function html_escape(s) {
 
 <p id='show_detail_line'>
 <a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 50.00% }</a>
-<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 2 }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 1 }</a>
 <a class="btn btn-success" href='javascript:showCase(2)'>通过{ 2 }</a>
 <a class="btn btn-info" href='javascript:showCase(3)'>所有{ 4 }</a>
 </p>
@@ -148,12 +148,12 @@ function html_escape(s) {
     <td>详细</td>
 </tr>
 
-<tr class='failClass warning'>
+<tr class='errorClass warning'>
     <td>test_register.TestRegister</td>
     <td class="text-center">4</td>
     <td class="text-center">2</td>
-    <td class="text-center">2</td>
-    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',4)" class="detail" id='c1'>详细</a></td>
 </tr>
 
@@ -181,9 +181,9 @@ function html_escape(s) {
 ft1_3: Traceback (most recent call last):
   File "D:\auto_framework\libs\ddt.py", line 182, in wrapper
     return func(self, *args, **kwargs)
-  File "D:\auto_framework\test_cases\test_register.py", line 93, in test_register
+  File "D:\auto_framework\test_cases\test_register.py", line 113, in test_register
     raise e
-  File "D:\auto_framework\test_cases\test_register.py", line 75, in test_register
+  File "D:\auto_framework\test_cases\test_register.py", line 95, in test_register
     self.assertEqual(test_data['expected'], res['code'])
 AssertionError: 1 != 2
 
@@ -194,24 +194,22 @@ AssertionError: 1 != 2
 </tr>
 
 <tr id='ft1_4' class='none'>
-    <td class='failCase'><div class='testcase'>test_register_4_注册成功</div></td>
+    <td class='errorCase'><div class='testcase'>test_register_4_注册成功</div></td>
     <td colspan='5' align='center'>
     <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>失败</button>
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>错误</button>
     <div id='div_ft1_4' class="collapse">  -->
     <!-- 默认展开错误信息 -Findyou -->
-    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>失败</button>
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>错误</button>
     <div id='div_ft1_4' class="collapse in" align="left">
     <pre>
     
 ft1_4: Traceback (most recent call last):
   File "D:\auto_framework\libs\ddt.py", line 182, in wrapper
     return func(self, *args, **kwargs)
-  File "D:\auto_framework\test_cases\test_register.py", line 93, in test_register
-    raise e
-  File "D:\auto_framework\test_cases\test_register.py", line 75, in test_register
-    self.assertEqual(test_data['expected'], res['code'])
-AssertionError: 0 != 2
+  File "D:\auto_framework\test_cases\test_register.py", line 80, in test_register
+    test_data['data'] = test_data['data'].replace('#exist_phone#', mobile['mobile_phone'])
+TypeError: 'NoneType' object is not subscriptable
 
 
     </pre>
@@ -223,8 +221,8 @@ AssertionError: 0 != 2
     <td>总计</td>
     <td>4</td>
     <td>2</td>
-    <td>2</td>
-    <td>0</td>
+    <td>1</td>
+    <td>1</td>
     <td>通过率：50.00%</td>
 </tr>
 </table>

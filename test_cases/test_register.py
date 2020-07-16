@@ -7,6 +7,7 @@
 """注册相关测试用例"""
 import os
 import unittest
+from datetime import datetime
 
 from common.db_handler import DBHandler
 from common.helper import generate_mobile
