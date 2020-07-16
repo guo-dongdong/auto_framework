@@ -1,2 +1,1 @@
- 2020-07-15 20:24:31,990 - test_register.py:84:python25:ERROR - 测试用例失败:1 != 2
-2020-07-15 20:24:32,088 - test_register.py:84:python25:ERROR - 测试用例失败:0 != 2
+2020-07-16 22:44:15,905 - test_register.py:103:python25:ERROR - 测试用例失败:1 != 2

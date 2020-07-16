@@ -25,6 +25,11 @@ class Config:
     if not os.path.exists(report_path):
         os.mkdir(report_path)
 
+    # log路径
+    log_path = os.path.join(root_path, 'log')
+    if not os.path.exists(log_path):
+        os.mkdir(log_path)
+
     #yaml
     yaml_config_path = os.path.join(config_path, 'config.yaml')
 
