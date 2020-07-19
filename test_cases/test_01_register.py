@@ -18,9 +18,13 @@ from config.setting import config
 from common.requests_handler import RequestsHandler
 import json
 from common import config_handler
+from middleware.helper import yaml_data
 
 # yaml读取
-yaml_data = config_handler.read_yaml(config.yaml_config_path)
+# 1.config_handler.read_yaml
+# yaml_data = config_handler.read_yaml(config.yaml_config_path)
+# 2.yaml_handler导入
+yaml_data
 
 
 @ddt.ddt
@@ -32,7 +36,7 @@ class TestRegister(unittest.TestCase):
 
     logger = LoggerHandler(yaml_data["logger"]["name"],
                            yaml_data["logger"]["level"],
-                           yaml_data["logger"]["file"])
+                           config.log_path + yaml_data["logger"]["file"])
 
 
     def setUp(self):
@@ -69,15 +73,15 @@ class TestRegister(unittest.TestCase):
 
         if '#new_phone#' in test_data['data']:
             while True:
-                mobile = generate_mobile()
+                gen_mobile = generate_mobile()
                 # 查询数据库，如果数据库存在改手机号，就直接使用这么号码
-                mobile = self.db.query('select * from member where mobile_phone=%s;', args=[mobile])
+                mobile = self.db.query('select * from member where mobile_phone=%s;', args=[gen_mobile])
                 # 直接查找数据库，随机找一个，直接使用这个手机号
                 # 替换
                 if not mobile:
                     break
 
-            test_data['data'] = test_data['data'].replace('#exist_phone#', mobile['mobile_phone'])
+            test_data['data'] = test_data['data'].replace('#new_phone#', gen_mobile)
 
 
 

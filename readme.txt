@@ -25,3 +25,9 @@ json 和 字典的转化尽量不要用eval（）
 port:3306
 用户:future
 密码:123456
+
+
+充值接口：
+一、前置条件登录的实现方式：
+1.setup     self.req.visit()  访问登录接口  res得到token
+2.

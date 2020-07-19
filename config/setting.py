@@ -30,6 +30,10 @@ class Config:
     if not os.path.exists(log_path):
         os.mkdir(log_path)
 
+    # # 艳霞
+    #     print(log_path)
+    #     print(os.mkdir(log_path))
+
     #yaml
     yaml_config_path = os.path.join(config_path, 'config.yaml')
 
@@ -40,3 +44,7 @@ class DevConfig(Config):
 
 
 config = DevConfig()
+
+if __name__ == '__main__':
+    m=Config()
+    print(m.log_path)

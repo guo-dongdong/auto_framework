@@ -4,7 +4,7 @@
 logger:
   name: python25
   level: WARNING
-  file: 'log/log.txt'
+  file: '/log.txt'
 
 database:
   host: '120.78.128.25'
@@ -13,3 +13,7 @@ database:
   password: '123456'
   charset: 'utf8'
   database: 'futureloan'
+
+user:
+  mobile_phone: '18298000000'
+  pwd: '12345678'
