@@ -89,7 +89,7 @@ class TestRecharge(unittest.TestCase):
         res = self.req.visit(test_data['method'],
                              config.host + test_data['url'],
                              json=json.loads(test_data['data']),
-                             headers=json.loads(headers))
+                             headers=headers)
         print(res)
 
         # 断言1  code码
