@@ -28,6 +28,7 @@ class DBHandler:
     def query(self, sql, args=None, one=True):
         """sql语句"""
         self.cursor.execute(sql, args)
+        self.conn.commit()      # TODO:提交事务
         # 获取结果
         if one:
 

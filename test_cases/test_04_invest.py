@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 
-"""充值相关测试用例"""
+"""投资相关测试用例"""
 import os
 import unittest
 from datetime import datetime
@@ -21,17 +21,15 @@ from middleware.yaml_handler import yaml_data
 
 # yaml读取
 # yaml_data = config_handler.read_yaml(config.yaml_config_path)
-
-
 yaml_data
 
 
 @ddt.ddt
-class TestRecharge(unittest.TestCase):
+class TestInvest(unittest.TestCase):
 
     # 读取数据
     excel_handler = ExcelHandler(config.data_path)
-    data = excel_handler.read('recharge')
+    data = excel_handler.read('invest')
 
     logger = LoggerHandler(yaml_data["logger"]["name"],
                            yaml_data["logger"]["level"],
@@ -55,6 +53,8 @@ class TestRecharge(unittest.TestCase):
         self.token = Context.token
         self.member_id = Context.member_id
 
+        # save_loan_id()
+
 
     def tearDown(self) -> None:
         self.req.close_session()
@@ -62,9 +62,9 @@ class TestRecharge(unittest.TestCase):
 
 
     @ddt.data(*data)
-    def test_recharge(self, test_data):
+    def test_Invest(self, test_data):
 
-        '''充值接口'''
+        '''投资接口'''
         # 1.替换json数据中的member_id，  #member_id#  替换成Context.member_id
         # 2. 访问接口，得到实际结果
         # 3.断言
@@ -79,8 +79,8 @@ class TestRecharge(unittest.TestCase):
         if "#member_id#" in test_data['data']:
             test_data['data'] = test_data['data'].replace('#member_id#', str(self.member_id))
 
-        if "#wrongr_id#" in test_data['data']:
-            test_data['data'] = test_data['data'].replace('#wrongr_id#', str(self.member_id + 2))
+        # if "#wrongr_id#" in test_data['data']:
+        #     test_data['data'] = test_data['data'].replace('#wrongr_id#', str(self.member_id + 2))
 
         # print(test_data)
 
@@ -110,5 +110,5 @@ class TestRecharge(unittest.TestCase):
             after_user = self.db.query(sql, args=[self.member_id, ])
             after_money = after_user["leave_amount"]
 
-            self.assertEqual(after_money, money + before_money)
+            self.assertEqual(after_money, before_money - money)
 

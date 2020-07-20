@@ -1,1 +1,5 @@
 2020-07-19 23:01:07,055 - test_01_register.py:108:python25:ERROR - 测试用例失败:0 != 2
+2020-07-20 20:13:47,379 - test_01_register.py:108:python25:ERROR - 测试用例失败:0 != 2
+2020-07-20 20:20:22,925 - test_01_register.py:108:python25:ERROR - 测试用例失败:0 != 2
+2020-07-20 20:53:26,551 - test_01_register.py:108:python25:ERROR - 测试用例失败:0 != 2
+2020-07-20 20:57:31,126 - test_01_register.py:108:python25:ERROR - 测试用例失败:0 != 2

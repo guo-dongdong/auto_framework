@@ -26,11 +26,19 @@ def login():
                     headers={"X-Lemonban-Media-Type":"lemonban.v2"})
     return res
 
+def login_admin():
+    pass
+
 # 保存token
 class Context:
     token = ''
     member_id = None
 
+def loan_id():
+    """查询数据了，得到loan_id
+    临时变量，保存到Context当中
+    """
+    pass
 
 
 def save_token():
@@ -49,6 +57,8 @@ def save_token():
     Context.member_id = member_id
 
     # return {"token":token, "member":member_id}
+
+
 
 
 
