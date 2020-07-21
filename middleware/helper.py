@@ -3,6 +3,7 @@
 # @Email :876417305@qq.com
 # @Author :yanxia
 # @File :helper.PY
+import re
 
 from common import config_handler
 from common.requests_handler import RequestsHandler
@@ -29,17 +30,23 @@ def login():
 def login_admin():
     pass
 
+# Context().loan_id()
+
 # 保存token
 class Context:
     token = ''
     member_id = None
 
-def loan_id():
-    """查询数据了，得到loan_id
-    临时变量，保存到Context当中
-    """
-    pass
+    @property
+    def loan_id(self):
+        """查询数据了，得到loan_id
+        临时变量，保存到Context当中
+        """
+        pass
 
+    @property
+    def token(self):
+        pass
 
 def save_token():
     """保存token信息"""
@@ -58,6 +65,14 @@ def save_token():
 
     # return {"token":token, "member":member_id}
 
+def replace_label(target):
+    """while 循环"""
+    re_pattern = r'#(.*?)#'
+    while re.findall(re_pattern, target):
+        # 如果能够匹配，直接替换
+        key = re.search(re_pattern, target).group(1)
+        target = re.sub(re_pattern, str(getattr(Context, key)), target, 1)
+    return target
 
 
 

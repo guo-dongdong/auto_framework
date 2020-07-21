@@ -40,10 +40,62 @@ import re
 # \w   -- 匹配数字字母下划线
 # \W反向
 # {2,}  匹配至少2次
+# {,2}  匹配最多两次
+# {2,4}  匹配2-4次
 # TODO:在正则表达式中，千万不要随便打空格
-re_pattern = r'\w{2,}'
-res = re.findall(re_pattern, "aa\nsdfd\tdsg_@fm12345dgdfg")
-print(res)
-re_pattern_01 = r'\W'
-res1 = re.findall(re_pattern_01, "aa\nsdfd\tdsg_@fm5dgdfg")
-print(res1)
+# re_pattern = r'\w{2,}'
+# re_pattern = r'\w{,2}'
+# re_pattern = r'\w{2,4}'
+# res = re.findall(re_pattern, "aa\nsdfd\tdsg_@fm12345dgdfg")
+# print(res)
+# re_pattern_01 = r'\W'
+# res1 = re.findall(re_pattern_01, "aa\nsdfd\tdsg_@fm5dgdfg")
+# print(res1)
+
+
+# 如何去匹配一个手机号
+# re_pattern = r'1[35789]\d{9}'
+# res = re.findall(re_pattern, "aa\nsdfd\tdsg_@f14298461920m12345dgdfg")
+# print(res)
+
+# * 匹配0次或者任意次
+# re_pattern = r'\d*'
+# res = re.findall(re_pattern, "aa\nsd2fd\td3s4g_5@66")
+# print(res)
+
+# ?  非贪婪模式
+# re_pattern = r'\d?'
+# res = re.findall(re_pattern, "aa\nsd2fd\td3s4g_5@66")
+# print(res)
+
+# mystr = '{"member_id":"#member_id#","loan_id":"#loan_id#","amount":-3,"username":"#username#"}'
+# re_pattern = r'#(.*?)#'
+# res = re.findall(re_pattern, mystr)
+# print(res)
+
+# re.sub    替换
+# mystr = re.sub(re_pattern, 'mem123', mystr, 1)
+# mystr = re.sub(re_pattern, 'loan123', mystr, 1)
+# mystr = re.sub(re_pattern, 'username123', mystr, 1)
+
+# print(mystr)
+
+class Context:
+    member_id = 2067
+    loan_id = 100
+    username = "guodongong"
+
+def replace_label(target):
+    """while 循环"""
+    re_pattern = r'#(.*?)#'
+    while re.findall(re_pattern, target):
+        # 如果能够匹配，直接替换
+        key = re.search(re_pattern, target).group(1)
+        target = re.sub(re_pattern, str(getattr(Context, key)), target, 1)
+    return target
+
+if __name__ == '__main__':
+    mystr = '{"member_id":"#member_id#","loan_id":"#loan_id#","amount":-3,"username":"#username#"}'
+
+    a = replace_label(mystr)
+    print(a)
