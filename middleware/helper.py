@@ -6,6 +6,7 @@
 import re
 
 from common import config_handler
+from common.db_handler import DBHandler
 from common.requests_handler import RequestsHandler
 from config.setting import config
 from middleware.yaml_handler import yaml_data
@@ -34,19 +35,47 @@ def login_admin():
 
 # 保存token
 class Context:
-    token = ''
-    member_id = None
+    # token = ''
+    # member_id = None
 
     @property
     def loan_id(self):
         """查询数据了，得到loan_id
         临时变量，保存到Context当中
+        return  返回loan标当中的id值
         """
-        pass
+        db = DBHandler(host=yaml_data['database']['host'],
+                       port=yaml_data['database']['port'],
+                       user=yaml_data['database']['user'],
+                       password=yaml_data['database']['password'],
+                       charset=yaml_data['database']['charset'],
+                       database=yaml_data['database']['database'])
+        loan = db.query('select * from loan where status=2 limit 10;')
+        db.close()
+        return loan['id']
 
     @property
     def token(self):
+        """token属性，而且属性会动态变化
+        Context().token    获取token自动调用这个方法
+        """
+        data = login()
+        t = jsonpath(data, '$..token')[0]
+        token_type = jsonpath(data, '$..token_type')[0]
+        t = " ".join([token_type, t])
+        return t
+
+    @property
+    def member_id(self):
+        data = login()
+        m_id = jsonpath(data, '$..id')[0]
+        return m_id
+
+    @property
+    def admin_member_id(self):
+        """"""
         pass
+
 
 def save_token():
     """保存token信息"""
@@ -89,5 +118,11 @@ if __name__ == '__main__':
     # print(jsonpath(data, '$..token_type')[0])
     # print(jsonpath(data, '$..id')[0])
 
-    data = save_token()
-    print(data)
+    # data = save_token()
+    # print(data)
+    print(Context().token)
+    print(Context().member_id)
+
+    print(Context().loan_id)
+
+    replace_label()

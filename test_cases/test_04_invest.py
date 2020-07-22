@@ -14,7 +14,7 @@ from config.setting import config
 from common.requests_handler import RequestsHandler
 import json
 from common import config_handler
-from middleware.helper import save_token, Context
+from middleware.helper import save_token, Context, replace_label
 from middleware.yaml_handler import yaml_data
 
 
@@ -29,7 +29,7 @@ class TestInvest(unittest.TestCase):
 
     # 读取数据
     excel_handler = ExcelHandler(config.data_path)
-    data = excel_handler.read('invest')
+    data = excel_handler.read('recharge')
 
     logger = LoggerHandler(yaml_data["logger"]["name"],
                            yaml_data["logger"]["level"],
@@ -49,9 +49,9 @@ class TestInvest(unittest.TestCase):
 
         # 登录用户，得到token
         # 结果
-        save_token()
-        self.token = Context.token
-        self.member_id = Context.member_id
+        # save_token()
+        # self.token = Context.token
+        # self.member_id = Context.member_id
 
         # save_loan_id()
 
@@ -62,38 +62,48 @@ class TestInvest(unittest.TestCase):
 
 
     @ddt.data(*data)
-    def test_Invest(self, test_data):
+    def test_invest(self, test_data):
 
         '''投资接口'''
         # 1.替换json数据中的member_id，  #member_id#  替换成Context.member_id
         # 2. 访问接口，得到实际结果
-        # 3.断言
+        # 3.
+
+        # 替换动态数据
+
+        token = Context().token
+        member_id = Context().member_id
+        loan_id = Context().loan_id
 
         # 查询数据库， 查询member_id的用户余额
         sql = "SELECT * FROM member WHERE id = %s;"
-        user = self.db.query(sql, args=[self.member_id, ])
-        print(user)
+        user = self.db.query(sql, args=[member_id, ])
         before_money = user["leave_amount"]
 
 
-        if "#member_id#" in test_data['data']:
-            test_data['data'] = test_data['data'].replace('#member_id#', str(self.member_id))
+        # if "#member_id#" in test_data['data']:
+        #     test_data['data'] = test_data['data'].replace('#member_id#', str(member_id))
 
-        # if "#wrongr_id#" in test_data['data']:
-        #     test_data['data'] = test_data['data'].replace('#wrongr_id#', str(self.member_id + 2))
+
+        test_data['data'] = replace_label(test_data['data'])
+
+        if "#wrongr_id#" in test_data['data']:
+            test_data['data'] = test_data['data'].replace('#wrongr_id#', str(self.member_id + 2))
 
         # print(test_data)
 
         # 读取excel当中的headers，得到字典
         headers = json.loads(test_data['headers'])
         # 添加Authorization 头信息
-        headers['Authorization'] = self.token
+        headers['Authorization'] = token
 
         # 访问接口得到实际结果
         res = self.req.visit(test_data['method'],
                              config.host + test_data['url'],
                              json=json.loads(test_data['data']),
                              headers=headers)
+
+        print("res=" , res)
 
         # 断言1  code码
         self.assertEqual(test_data['expected'], res['code'])
@@ -107,7 +117,7 @@ class TestInvest(unittest.TestCase):
             # before_money
             # 获取充值后的金额
             sql = "SELECT * FROM member WHERE id = %s;"
-            after_user = self.db.query(sql, args=[self.member_id, ])
+            after_user = self.db.query(sql, args=[member_id, ])
             after_money = after_user["leave_amount"]
 
             self.assertEqual(after_money, before_money - money)
