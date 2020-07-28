@@ -8,7 +8,6 @@
 
 from configparser import ConfigParser
 import yaml
-
 from config.setting import config
 
 
@@ -20,6 +19,7 @@ class ConfigHandler(ConfigParser):
         """
         super().__init__()
         self.read(file, encoding=encoding)
+
 
 def read_yaml(file, encoding='utf-8'):
     with open(file, encoding=encoding) as f:
@@ -36,17 +36,6 @@ def write_yaml(file, data, encoding='utf-8'):
 
 
 if __name__ == '__main__':
-    # config = ConfigHandler('python_25.ini')
-    # a = config.get("teachers","name")
-    # print(a)
-    #
-    # b = read_yaml("python_25.yaml")
-    # print(b)
-
-    # 先读取yaml数据
-    # data = read_yaml("python_25.yaml")
-    # write_yaml("pytron_26.yaml", data)
-
     # yaml读取
     yaml_data = read_yaml(config.yaml_config_path)
     print(yaml_data)

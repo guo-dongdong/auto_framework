@@ -3,8 +3,8 @@
 # @Email :876417305@qq.com
 # @Author :yanxia
 # @File :yaml_handler.PY
-import yaml
 
+import yaml
 from config.setting import config
 
 

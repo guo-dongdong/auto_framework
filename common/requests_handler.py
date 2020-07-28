@@ -5,18 +5,12 @@
 # @Email   : Email
 # @File    : homework_requests
 
-"""
-
-"""
 import requests
-
-
 
 class RequestsHandler:
 
     def __init__(self):
         self.session = requests.Session()
-
 
     def visit(self,  method, url, params=None, data=None, json=None, **kwargs):
 

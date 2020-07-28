@@ -7,11 +7,6 @@
 from openpyxl import load_workbook
 from openpyxl.worksheet.worksheet import Worksheet
 
-"""
-1.打开表单
-2.读取表单
-"""
-
 
 class ExcelHandler():
     """操作excel"""
@@ -36,17 +31,6 @@ class ExcelHandler():
             headers.append(i.value)
         return headers
 
-    # def read(self, sheet_name):
-    #     """读取所有额数据"""
-    #     sheet = self.open_sheet(sheet_name)
-    #     rows = list(sheet.rows)[1:]
-    #     data = []
-    #     for row in rows:
-    #         row_data = []
-    #         for cell in row:
-    #             row_data.append(cell.value)
-    #         data.append(row_data)
-    #     return data
 
     def read(self, sheet_name):
         """读取所有额数据"""

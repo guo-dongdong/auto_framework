@@ -6,7 +6,6 @@
 
 import pymysql
 from pymysql.cursors import DictCursor
-
 from common import config_handler
 from config.setting import config
 
@@ -31,7 +30,6 @@ class DBHandler:
         self.conn.commit()      # TODO:提交事务
         # 获取结果
         if one:
-
             return self.cursor.fetchone()
         else:
             return self.cursor.fetchall()
@@ -40,6 +38,7 @@ class DBHandler:
         """关闭连接"""
         self.cursor.close()
         self.conn.close()
+
 
 if __name__ == '__main__':
     # 参数读取配置文件
