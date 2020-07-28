@@ -26,6 +26,6 @@ file_path = os.path.join(config.report_path, file_name)
 # HTML
 # TODO:HTML一定要使用二进制的方式打开
 with open(file_path, 'wb',) as f:
-    runner = HTMLTestRunner(f,title="前程贷接口测试报告",description="前程贷接口测试报告",tester="_小川")
+    runner = HTMLTestRunner(f,title="Test接口测试报告",description="Test接口测试报告",tester="_小川")
     runner.run(suite)
 
